@@ -19,7 +19,6 @@ def input_students
   students
 end
 
-students = input_students
 def print_header
   puts "The student of Villains Academy"
   puts "----------"
@@ -35,6 +34,7 @@ def print_footer(students)
   puts "Overall, we have #{students.count} great students"
 end
 
+students = input_students
 #nothing happens until we call the methods
 print_header
 print(students)
