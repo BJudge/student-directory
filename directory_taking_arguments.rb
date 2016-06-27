@@ -113,18 +113,18 @@ def save_students
   file = File.open("students.csv", "w")
   # iterate over the array of students
   @students.each do |student|
-    student_data = [student[:name], student[:cohort]]
+    student_data = [student[:name], student[:cohort_name], student[:cohort_start], student[:hobby], student[:height]]
     csv_line = student_data.join(",")
     file.puts csv_line
   end
   file.close
 end
 
-def load_students(filenmae = "students.csv")
-  file = File.open("students.csv", "r")
+def load_students(filename = "students.csv")
+  file = File.open(filename, "r")
   file.readlines.each do |line|
   name, cohort = line.chomp.split(',')
-    @students << {name: name, cohort: cohort.to_sym}
+    @students << {name: name, cohort_name: cohort}
   end
   file.close
 end
@@ -141,10 +141,8 @@ def print_students_list
 
   while @students.length > index_counter
     puts   "#{index_counter +1}.".to_s.rjust(5,'--') +" #{@students[index_counter][:name].capitalize.ljust(20,'--')}"
-     puts "#{@students[index_counter] [:cohort_name]}"
-     puts "#{@students[index_counter][:cohort_start].capitalize.rjust(10,'--')}"+ " cohort".ljust(10,'--')
-     puts "#{@students[index_counter][:hobby].center(20,'--')}"
-     puts "#{@students[index_counter][:height].center(20,'--')}"
+    puts "#{@students[index_counter] [:cohort_name]}"
+
     index_counter += 1
   end
 
@@ -166,8 +164,8 @@ end
 def print_footer
   puts "Overall, we have #{@students.count} great students"
 end
-
+end
 
 #nothing happens until we call the methods
-try_load_students
+
 interactive_menu
